@@ -49,7 +49,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>uv run main.py $1</string>
+				<string>~/.local/bin/uv run main.py $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -87,7 +87,12 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>- icon by Jagat Icon on Flaticon</string>
+	<string># Setup 
+! Requires the uv package manager: [astral.sh/uv](https://astral.sh/uv) !
+
+On first time run, installing of dependencies might take longer than expected.
+
+- icon by Jagat Icon on Flaticon
 	<key>uidata</key>
 	<dict>
 		<key>1965AFE2-D9EC-47B9-9D08-BA8FABADAC0C</key>
