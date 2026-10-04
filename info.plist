@@ -35,7 +35,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>102</integer>
 				<key>keyword</key>
 				<string>nt</string>
 				<key>queuedelaycustom</key>
@@ -49,10 +49,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>import os, sys
-
-
-sys.stdout.write(os.environ["keyword"])</string>
+				<string>uv run main.py $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -60,9 +57,9 @@ sys.stdout.write(os.environ["keyword"])</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>john</string>
+				<string></string>
 				<key>type</key>
-				<integer>9</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -137,7 +134,11 @@ sys.stdout.write(os.environ["keyword"])</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>[{"g": "de"}, {"e": "en"}, {"s": "es"}]</string>
+				<string>[
+	{"g": "de"}, 
+	{"e": "en"}, 
+	{"s": "es"}
+]</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
@@ -158,7 +159,11 @@ sys.stdout.write(os.environ["keyword"])</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>[{"de":"🇩🇪"}, {"en": "🇺🇸"}, {"es": "🇪🇸"}]</string>
+				<string>[
+	{"de": "🇩🇪"}, 
+	{"en": "🇺🇸"}, 
+	{"es": "🇪🇸"}
+]</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
@@ -175,12 +180,39 @@ sys.stdout.write(os.environ["keyword"])</string>
 			<key>variable</key>
 			<string>languageflagmap</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>argoslean</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Argos Lean</string>
+						<string>argoslean</string>
+					</array>
+					<array>
+						<string>Argos Stock</string>
+						<string>argosstock</string>
+					</array>
+					<array>
+						<string>Googletrans</string>
+						<string>googletrans</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Argos Lean &amp; Stock use the argos-translate package. The Stock backend uses the default translation code flow, as intended by the developers. However, due to unnecessary imports and the nature of Alfred workflows, this backend is extremely sluggish (almost 2s for a translation). The Lean backend features a manual code path through the Argos package. The results may be different (especially on longer texts), sometimes even incorrect. However, this backend is extremely responsive, usually under 200ms per translation.
+
+The googletrans backend uses the eponymous package to pull translation from Google Translate. It doesn't rely on private API keys pulled from other projects (like some other Alfred workflows used to do), but it is still an undocumented API and may break at any time. This backend is responsive and usually provides the best results.</string>
+			<key>label</key>
+			<string>Translation Backend</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>backend</string>
+		</dict>
 	</array>
-	<key>variables</key>
-	<dict>
-		<key>last_translation</key>
-		<string></string>
-	</dict>
 	<key>version</key>
 	<string>1.0</string>
 	<key>webaddress</key>
