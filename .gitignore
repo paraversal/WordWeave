@@ -109,3 +109,6 @@ dmypy.json
 
 # PyPI configuration file
 .pypirc
+argos-download
+argos-models
+prefs.plist
