@@ -6,7 +6,7 @@ Fast offline translation in [Alfred](https://www.alfredapp.com/) using a lean im
 
 ## Features
 
-- **Ranked results**: see several candidate translations in Alfred's result list, with a user-configurable parameter to dial in how many you results you are shown.
+- **Ranked results**: see several candidate translations in Alfred's result list, with a user-configurable parameter to dial in how many results you are shown.
 - **Every language pair is a first-class citizen**: no "default" pair or language must (or can!) be specified - polyglots welcome!
 - **Customizable QuickCode system**: define short handles for your most-used languages, or specify language pairs via their ISO 639-1 codes.
 - **Customizable emoji per language**: don't feel like the U.S. flag should represent the English language? Me neither! Specify exactly which flag should represent which language, or forgo national flags entirely. The world is your oyster! 🏳️‍🌈
