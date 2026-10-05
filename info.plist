@@ -8,8 +8,47 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
+		<key>76D220C1-4FEA-443B-9C93-6E923B281B8A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A357A47F-4D24-4ECB-A319-F30FCA4E7D3B</key>
 		<array/>
+		<key>D6E73287-2C27-45F1-A954-91240922D988</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6628A0F6-597B-4905-876F-B8FE26A7D265</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C2413442-192F-412B-A6A9-01231E3468E3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Paraversal</string>
@@ -37,19 +76,19 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>nt</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>~/.local/bin/uv run main.py $1</string>
+				<string>~/.local/bin/uv run main.py translate "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -73,15 +112,153 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>leftcursor</key>
+				<key>externaltriggerid</key>
+				<string>progress</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>C2413442-192F-412B-A6A9-01231E3468E3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:keyworddownload}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>.venv/bin/python main.py list-pairs "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>76D220C1-4FEA-443B-9C93-6E923B281B8A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>.venv/bin/python main.py download "$from" "$to"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>.venv/bin/python main.py progress</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.showalfred</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>1965AFE2-D9EC-47B9-9D08-BA8FABADAC0C</string>
+			<string>6628A0F6-597B-4905-876F-B8FE26A7D265</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>progress</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D6E73287-2C27-45F1-A954-91240922D988</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -92,24 +269,80 @@
 
 On first time run, installing of dependencies might take longer than expected.
 
-- icon by Jagat Icon on Flaticon
+# Usage
+
+Translation
+
+# How does translation work?
+
+WordWeave uses the `argos-translate` package. You can read into the technicalities if you're interested, but brevity's sake only the most important information:
+
+- `argos-translate` uses unidirectional translation models. This means, to translate, e.g. Spanish -&gt; English requires a separate model from translating English -&gt; Spanish.
+- `argos-translate` uses proprietary translation models - this means, there is only a limited selection of language pairs available. Crucially, almost all language pairs translate either *from* English or *to* English. In order to translate between language pairs where neither language is English (e.g., Spanish -&gt; German), a pivot via English is used. Translating from x -&gt; y would therefore become x -&gt; English -&gt; Y. This architecture is probably not ideal, but it is probably also better than a multilanguage model small enough to be viable for an Alfred workflow. In the future, this workflow is planned to have the option to fallback to Google Translate for language pairs that need English as a pivot if `argos-translate` was used.
+- models are installed into `~/.local/share/argos-translate`.
+
+---- 
+
+The googletrans backend uses the eponymous package to pull translation from Google Translate. It doesn't rely on private API keys pulled from other projects (like some other Alfred workflows used to do), but it is still an undocumented API and may break at any time. This backend is responsive and usually provides the best results.
+
+# Attributions
+
+- worklofw icon by Jagat Icon on Flaticon</string>
 	<key>uidata</key>
 	<dict>
-		<key>1965AFE2-D9EC-47B9-9D08-BA8FABADAC0C</key>
+		<key>6628A0F6-597B-4905-876F-B8FE26A7D265</key>
 		<dict>
-			<key>note</key>
-			<string>reinvoke Alfred with inverse languages and previous translation</string>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>640</real>
+		</dict>
+		<key>76D220C1-4FEA-443B-9C93-6E923B281B8A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>all purple nodes: related to new model download</string>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>475</real>
 		</dict>
 		<key>A357A47F-4D24-4ECB-A319-F30FCA4E7D3B</key>
 		<dict>
 			<key>xpos</key>
-			<real>195</real>
+			<real>180</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>320</real>
+		</dict>
+		<key>C2413442-192F-412B-A6A9-01231E3468E3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>D6E73287-2C27-45F1-A954-91240922D988</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>640</real>
+		</dict>
+		<key>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>475</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -129,11 +362,32 @@ On first time run, installing of dependencies might take longer than expected.
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Keyword</string>
+			<string>Keyword for translation</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>btd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword for download of new models</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyworddownload</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -209,7 +463,29 @@ On first time run, installing of dependencies might take longer than expected.
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>backend</string>
+			<string>ww_backend</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>1.0</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The translation models output probabilities for many different translations of a given input. This parameter is the cutoff value for how much lower the confidence of any translation is, in comparison to the translation with the highest accuracy. To make a long story short: the higher this value is, the more translations of any word are displayed, but the rate of inaccurate/near-duplicate translation increases too. Choose your trade-off.
+1.0 is a conservative default. I would generally push it higher to 2.0 - 4.0.</string>
+			<key>label</key>
+			<string>Max Log-P Gap</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ww_max_gap</string>
 		</dict>
 	</array>
 	<key>version</key>
