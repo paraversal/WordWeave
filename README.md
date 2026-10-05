@@ -1,6 +1,6 @@
 # WordWeave
 
-Fast offline translation in [Alfred](https://www.alfredapp.com/) using a lean implementation of [Argos](github.com/argosopentech/argos-translate/). It offers a ranked list of candidate translations and is built for **ping-pong**: translate a word, press Tab, translate the result back, repeat. A word in one language often maps to several in another, so bouncing back and forth works like a cross-language thesaurus. Great for finding the word on the tip of your tongue. Which Great fun!
+Fast offline translation in [Alfred](https://www.alfredapp.com/) using a lean implementation of [Argos](github.com/argosopentech/argos-translate/). It offers a ranked list of candidate translations and is built for **ping-pong**: translate a word, press Tab, translate the result back, repeat. A word in one language often maps to several in another, so bouncing back and forth works like a cross-language thesaurus. Great for finding the word on the tip of your tongue. What great fun!
 
 ![](readme_media/cover.png)
 
