@@ -13,6 +13,12 @@ def cache_dir() -> Path:
     return Path(os.environ.get("alfred_workflow_cache", "/tmp"))
 
 
+def max_gap() -> float:
+    max_gap = os.environ.get("ww_max_gap")
+    assert max_gap is not None
+    return float(max_gap)
+
+
 def get_chosen_backend_name() -> str:
     backend = os.environ.get("ww_backend")
     if not backend:
