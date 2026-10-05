@@ -51,7 +51,7 @@ Model data is fetched from the upstream Argos package index at install time; it 
 ```bash
 git clone https://github.com/paraversal/WordWeave.git
 # create symlink to the local repo in the Alfred workflow folder. Any changes in the local repo folder are mirrored to Alfred
-ln -s WordWeave ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows/user.workflow.WordWeave
+ln -s WordWeave/src ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows/user.workflow.WordWeave
 ```
 
 ## Contributing
