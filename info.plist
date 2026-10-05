@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string></string>
+	<string>com.paraversal.WordWeave</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
@@ -53,7 +53,7 @@
 	<key>createdby</key>
 	<string>Paraversal</string>
 	<key>description</key>
-	<string>A simple way to translate and mirror words between languages, allowing the user to find specific terms by translating and back-translating quickly.</string>
+	<string>Simple offline ping-pong translation.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -264,30 +264,58 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Setup 
-! Requires the uv package manager: [astral.sh/uv](https://astral.sh/uv) !
+	<string># WordWeave
 
-On first time run, installing of dependencies might take longer than expected.
+Offline translation built for **ping-pong**: translate a word, press Tab, translate the result back, repeat. A word in one language often maps to several in another, so bouncing back and forth works like a cross-language thesaurus. Great for finding the word on the tip of your tongue.
 
-# Usage
+## Translating
 
-Translation
+```
+bt  ge  Hausboot
+│   │   └─ text (a word, phrase, or sentence)
+│   └──── language pair (source, then target)
+└──────── keyword
+```
 
-# How does translation work?
+There's no default language pair, so every query names both languages. Pick one of two styles (you can't mix them within a query):
 
-WordWeave uses the `argos-translate` package. You can read into the technicalities if you're interested, but brevity's sake only the most important information:
+- **QuickCode**: one letter per language, from your Quick Code Map. `ge` is German → English.
+- **ISO**: a dot, then two ISO 639-1 codes. `.deen` is German → English.
 
-- `argos-translate` uses unidirectional translation models. This means, to translate, e.g. Spanish -&gt; English requires a separate model from translating English -&gt; Spanish.
-- `argos-translate` uses proprietary translation models - this means, there is only a limited selection of language pairs available. Crucially, almost all language pairs translate either *from* English or *to* English. In order to translate between language pairs where neither language is English (e.g., Spanish -&gt; German), a pivot via English is used. Translating from x -&gt; y would therefore become x -&gt; English -&gt; Y. This architecture is probably not ideal, but it is probably also better than a multilanguage model small enough to be viable for an Alfred workflow. In the future, this workflow is planned to have the option to fallback to Google Translate for language pairs that need English as a pivot if `argos-translate` was used.
-- models are installed into `~/.local/share/argos-translate`.
+As you type, the top row shows how your pair was understood, e.g. `Translate from 🇩🇪 -&gt; __ (ISO Mode)`. An unknown code shows ❓.
 
----- 
+Results are ranked best first. Press **Tab** on one to swap the pair and carry the word over:
 
-The googletrans backend uses the eponymous package to pull translation from Google Translate. It doesn't rely on private API keys pulled from other projects (like some other Alfred workflows used to do), but it is still an undocumented API and may break at any time. This backend is responsive and usually provides the best results.
+`bt .deen Hausboot` → Tab → `bt .ende House boat`
 
-# Attributions
+⌘C copies a result and ⌘L shows it in Large Type.
 
-- worklofw icon by Jagat Icon on Flaticon</string>
+## Downloading models
+
+Nothing is bundled. Use the download keyword (default `btd`) to browse available pairs, filtering by code or name: `btd en pt` or `btd english port`. Press ↩ on a pair to install it and watch the progress bar. Once a model is installed, it works fully offline.
+
+Only one download runs at a time. If a download stalls, check `job.log` in the workflow's cache folder.
+
+## Things worth knowing
+
+**Models are one-way.** English → Spanish and Spanish → English are separate models, each needing its own download. For ping-pong you'll want both.
+
+**Pivot translation.** Most models go from or to English. For other pairs, such as Spanish → German, WordWeave chains two models through English (Spanish → English → German). You need both installed, and the result row tells you which one is missing. Pivoted results are a bit slower, a bit less accurate, and show fewer alternatives. Direct models are always preferred when they exist.
+
+**Keep it short.** Words and short phrases work best. This is a small offline model, so don't expect Google Translate quality on long passages. And if you do, I hope you are ready for some true whimsy!
+
+## Settings
+
+**Quick Code Map** and **Language-Flag map** are JSON lists of one-entry objects:
+
+```json
+[{"g": "de"}, {"e": "en"}]
+[{"en": "🇨🇦"}, {"de": "🇦🇹"}]
+```
+
+Quick codes must be a single letter. For flags, pick whatever emoji you feel represents a language. A language without a flag shows its code in brackets, like `[fr]`.
+
+If a setting is malformed, WordWeave says so in the result list.</string>
 	<key>uidata</key>
 	<dict>
 		<key>6628A0F6-597B-4905-876F-B8FE26A7D265</key>
@@ -457,7 +485,7 @@ The googletrans backend uses the eponymous package to pull translation from Goog
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Lean &amp; Stock backends both use the argos-translate package. The Stock backend uses the default translation code flow, as intended by the developers. However, due to unnecessary imports and the nature of Alfred workflows, this backend is extremely sluggish (almost 2s for every invocation). The Lean backend features a manual implementation of translation through Argos without pulling in the heaviest dependencies. The results may be different (especially on longer texts), sometimes even incorrect. However, this backend is extremely responsive, usually under 200ms per translation.</string>
+			<string>You hve the choice between Lean (a streamlined reimplementation, the default, usually under 200 ms - but can give different or worse results on longer text) and Stock (the official Argos pipeline, around 2 s per query). Both use the same models.</string>
 			<key>label</key>
 			<string>Translation Backend</string>
 			<key>type</key>
@@ -478,8 +506,7 @@ The googletrans backend uses the eponymous package to pull translation from Goog
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>The translation models output probabilities for many different translations of a given input. This parameter is the cutoff value for how much lower the confidence of any translation is, in comparison to the translation with the highest accuracy. To make a long story short: the higher this value is, the more translations of any word are displayed, but the rate of inaccurate/near-duplicate translation increases too. Choose your trade-off.
-1.0 is a conservative default. I would generally push it higher to 2.0 - 4.0.</string>
+			<string>Controls how many alternatives you see. Each candidate has a score, and one is shown only if its score is within this gap of the best candidate's. Lower values give a few confident answers. Higher values show more options, but noisier ones. The default is 1.0; for thesaurus-style exploring, try 2.0–10.0.</string>
 			<key>label</key>
 			<string>Max Log-P Gap</string>
 			<key>type</key>
@@ -488,9 +515,11 @@ The googletrans backend uses the eponymous package to pull translation from Goog
 			<string>ww_max_gap</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.0</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/paraversal</string>
 </dict>
 </plist>
