@@ -515,10 +515,8 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<string>ww_max_gap</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/paraversal</string>
 </dict>
