@@ -422,9 +422,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<dict>
 				<key>default</key>
 				<string>[
-	{"g": "de"}, 
-	{"e": "en"}, 
-	{"s": "es"}
+	{"e": "en"},
 ]</string>
 				<key>required</key>
 				<false/>
@@ -447,9 +445,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<dict>
 				<key>default</key>
 				<string>[
-	{"de": "🇩🇪"}, 
-	{"en": "🇺🇸"}, 
-	{"es": "🇪🇸"}
+	{"en": "🌍️"}, 
 ]</string>
 				<key>required</key>
 				<false/>
