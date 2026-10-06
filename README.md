@@ -22,25 +22,19 @@ Fast offline translation in [Alfred](https://www.alfredapp.com/) using a lean im
 
 1. Download the latest `.alfredworkflow` from the [Releases](../../releases) page.
 2. Double-click it to import into Alfred.
-3. On first run, the workflow installs its dependencies and downloads the common offline language packs.
+3. On first run, the workflow installs its dependencies. Model data is fetched from the upstream Argos package index at install time; it is not bundled in this repository. See the documentation inside the workflow to learn how to download models. 
 
 ## Usage
 
 | Keyword | What it does |
 | --- | --- |
-| `[keyword] <text>` | Translate `<text>` using your default language pair |
 | `[keyword] .dees <text>` | Prepend a dot to specify the language pair via their ISO 639 codes. |
-| `[keyword] gs <text>` | Don't prepend with a dot to specify the language pair via the customizable QuickCode language map|
+| `[keyword] gs <text>` | Don't prepend with a dot to specify the language pair via the customizable QuickCode language map.|
+|`[download keyword] english german`| Search the model repository for the English → German model.|
 
 Press `tab` to quickly reverse-translate:
 
 `[keyword] .deen Hausboot` → *tab* → `[keyword] .ende House boat`
-
-## Offline language packs
-
-Argos translation pairs can be installed on demand using the download keyword. 
-
-Model data is fetched from the upstream Argos package index at install time; it is not bundled in this repository.
 
 ## Known limitations
 
