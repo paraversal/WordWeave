@@ -18,3 +18,11 @@ class PairUnavailable(TranslationError):
     def __init__(self, src: str, dst: str):
         super().__init__(f"no downloadable package for {src}->{dst}")
         self.src, self.dst = src, dst
+
+
+class BackendUnavailable(TranslationError):
+    """An online backend could not be reached or rejected the request (offline, rate-limited...)."""
+
+    def __init__(self, backend: str, reason: str):
+        super().__init__(f"{backend} unavailable: {reason}")
+        self.backend, self.reason = backend, reason

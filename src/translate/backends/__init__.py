@@ -25,11 +25,16 @@ def _argos_lean(cache_dir: Path) -> "Backend":
     return LeanArgos(ArgosCatalog(cache_dir))
 
 
+def _googletrans(cache_dir: Path) -> "Backend":
+    from translate.backends.googletrans import GoogleTrans
+    return GoogleTrans()
+
+
 # Keys must match the values offered in info.plist's backend setting.
 BACKENDS: dict[str, Callable[[Path], "Backend"]] = {
     "argosstock": _argos_stock,
     "argoslean": _argos_lean,
-    # "googletrans": _googletrans,
+    "googletrans": _googletrans,
 }
 
 
