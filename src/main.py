@@ -29,7 +29,7 @@ def _progress(args: list[str]) -> None:
 
 
 COMMANDS: dict[str, Callable[[list[str]], None]] = {
-    "translate": _translate,     # main.py translate "<query>"
+    "translate": _translate,     # main.py translate <backend> "<query>"
     "list-pairs": _list_pairs,   # main.py list-pairs "<query>"
     "download": _download,       # main.py download <from> <to>
     "progress": _progress,       # main.py progress

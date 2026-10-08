@@ -23,6 +23,8 @@
 		</array>
 		<key>A357A47F-4D24-4ECB-A319-F30FCA4E7D3B</key>
 		<array/>
+		<key>CCB7D5B6-3ABC-4016-9030-EF740A39E487</key>
+		<array/>
 		<key>D6E73287-2C27-45F1-A954-91240922D988</key>
 		<array>
 			<dict>
@@ -53,7 +55,7 @@
 	<key>createdby</key>
 	<string>Paraversal</string>
 	<key>description</key>
-	<string>Simple offline ping-pong translation.</string>
+	<string>Ping-pong translation: offline with Argos, online with Google.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -76,7 +78,56 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>{var:keyword}</string>
+				<string>{var:ww_keyword_google}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>~/.local/bin/uv run main.py translate googletrans "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CCB7D5B6-3ABC-4016-9030-EF740A39E487</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:ww_keyword_argos}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -88,7 +139,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>~/.local/bin/uv run main.py translate "$1"</string>
+				<string>~/.local/bin/uv run main.py translate "${ww_argos_engine:-argoslean}" "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -108,6 +159,29 @@
 			<string>A357A47F-4D24-4ECB-A319-F30FCA4E7D3B</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>.venv/bin/python main.py download "$from" "$to"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -144,7 +218,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>{var:keyworddownload}</string>
+				<string>{var:ww_keyword_download}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -180,25 +254,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>availableviaurlhandler</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>.venv/bin/python main.py download "$from" "$to"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
+				<key>triggerid</key>
+				<string>progress</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>DD42BF81-5B83-4808-BCEA-FA03AB3F012B</string>
+			<string>D6E73287-2C27-45F1-A954-91240922D988</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -246,21 +312,6 @@
 			<string>6628A0F6-597B-4905-876F-B8FE26A7D265</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>progress</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>D6E73287-2C27-45F1-A954-91240922D988</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -340,6 +391,8 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 		</dict>
 		<key>A357A47F-4D24-4ECB-A319-F30FCA4E7D3B</key>
 		<dict>
+			<key>note</key>
+			<string>Argos (offline)</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
@@ -353,6 +406,15 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<real>475</real>
 			<key>ypos</key>
 			<real>475</real>
+		</dict>
+		<key>CCB7D5B6-3ABC-4016-9030-EF740A39E487</key>
+		<dict>
+			<key>note</key>
+			<string>Google (online)</string>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>175</real>
 		</dict>
 		<key>D6E73287-2C27-45F1-A954-91240922D988</key>
 		<dict>
@@ -388,13 +450,34 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Translates with Argos models on your Mac: works offline and your text never leaves your computer. Leave empty to turn this keyword off.</string>
 			<key>label</key>
-			<string>Keyword for translation</string>
+			<string>Keyword: Argos (offline)</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>keyword</string>
+			<string>ww_keyword_argos</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>btg</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Translates with Google Translate: needs no model downloads, but needs an internet connection and sends everything you type after this keyword to Google. Leave empty to turn this keyword off, e.g. to keep WordWeave fully offline.</string>
+			<key>label</key>
+			<string>Keyword: Google (online)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ww_keyword_google</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -409,13 +492,13 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Browse and install the Argos models that the Argos keyword needs. Not used by the Google keyword. Leave empty to turn this keyword off.</string>
 			<key>label</key>
-			<string>Keyword for download of new models</string>
+			<string>Keyword: download Argos models</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>keyworddownload</string>
+			<string>ww_keyword_download</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -432,13 +515,13 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Single-letter handles for languages. Shared by both translation keywords.</string>
 			<key>label</key>
 			<string>Quick Code Map</string>
 			<key>type</key>
 			<string>textarea</string>
 			<key>variable</key>
-			<string>quickcodemap</string>
+			<string>ww_quickcode_map</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -455,13 +538,13 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Which emoji represents each language. Shared by both translation keywords.</string>
 			<key>label</key>
 			<string>Language-Flag map</string>
 			<key>type</key>
 			<string>textarea</string>
 			<key>variable</key>
-			<string>languageflagmap</string>
+			<string>ww_flag_map</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -481,13 +564,13 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>You hve the choice between Lean (a streamlined reimplementation, the default, usually under 200 ms - but can give different or worse results on longer text) and Stock (the official Argos pipeline, around 2 s per query). Both use the same models.</string>
+			<string>Which engine the Argos keyword uses. Lean (default) is a streamlined reimplementation, usually under 200 ms, but can give different or worse results on longer text. Stock is the official Argos pipeline, around 2 s per query. Both use the same downloaded models. Has no effect on the Google keyword.</string>
 			<key>label</key>
-			<string>Translation Backend</string>
+			<string>Argos engine</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>ww_backend</string>
+			<string>ww_argos_engine</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -528,7 +611,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Controls how many alternatives you see. Each candidate has a score, and one is shown only if its score is within this gap of the best candidate's. Lower values give a few confident answers. Higher values show more options, but noisier ones. The default is 1.0; for thesaurus-style exploring, try 2.0–10.0.</string>
+			<string>Controls how many alternatives you see. Each candidate has a score, and one is shown only if its score is within this gap of the best candidate's. Lower values give a few confident answers. Higher values show more options, but noisier ones. The default is 1.0; for thesaurus-style exploring, try 2.0–10.0. Google's scores are based on word frequency and are spread further apart than Argos's, so for Google you may need a higher value to see more than one or two alternatives.</string>
 			<key>label</key>
 			<string>Max Log-P Gap</string>
 			<key>type</key>
@@ -538,7 +621,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/paraversal</string>
 </dict>

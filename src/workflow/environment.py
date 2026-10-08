@@ -19,13 +19,6 @@ def max_gap() -> float:
     return float(max_gap)
 
 
-def get_chosen_backend_name() -> str:
-    backend = os.environ.get("ww_backend")
-    if not backend:
-        raise ConfigError("The 'ww_backend' setting is empty. Choose a backend in the workflow settings.")
-    return backend
-
-
 PAIR_DISPLAY_MODES = ("header", "subtitle")
 
 
@@ -68,7 +61,7 @@ def _json_map(variable: str, label: str, lowercase_values: bool) -> dict[str, st
 
 def get_quickcode_map() -> dict[str, str]:
     """Letter -> ISO code, e.g. {"g": "de", "e": "en"}. Letters must be single characters."""
-    qmap = _json_map("quickcodemap", "The Quick Code Map", lowercase_values=True)
+    qmap = _json_map("ww_quickcode_map", "The Quick Code Map", lowercase_values=True)
     bad = [k for k in qmap if len(k) != 1]
     if bad:
         raise ConfigError(f"Quick codes must be a single letter, got: {', '.join(bad)}")
@@ -77,4 +70,4 @@ def get_quickcode_map() -> dict[str, str]:
 
 def get_flag_map() -> dict[str, str]:
     """ISO code -> flag emoji, e.g. {"de": "🇩🇪"}."""
-    return _json_map("languageflagmap", "The Language-Flag map", lowercase_values=False)
+    return _json_map("ww_flag_map", "The Language-Flag map", lowercase_values=False)

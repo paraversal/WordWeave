@@ -1,6 +1,8 @@
-"""`main.py translate "<query>"`: the main Alfred script filter (keyword + pair + text).
+"""`main.py translate <backend> "<query>"`: the main Alfred script filter (keyword + pair + text).
 
-Flow: read settings -> parse the query -> show one of
+Each translate keyword in Alfred passes the backend it stands for (see `translate.BACKENDS`).
+
+Flow: make the backend -> read settings -> parse the query -> show one of
   - the help row,
   - a pair template ("Translate from 🇩🇪 -> __ (ISO Mode)") while the pair is incomplete,
   - a download row when the model for the pair isn't installed,
@@ -16,8 +18,7 @@ from translate.errors import PairNotInstalled
 from translate.select import select
 from translate.types import Backend, Language, Pair
 from workflow.environment import (
-    ConfigError, cache_dir, get_chosen_backend_name, get_flag_map, get_pair_display,
-    get_quickcode_map,
+    ConfigError, cache_dir, get_flag_map, get_pair_display, get_quickcode_map,
 )
 from workflow.parse import parse_command
 from workflow.types import (
@@ -140,9 +141,9 @@ def _translate(req: TranslationRequest, backend: Backend, quickcodes: dict[str, 
     _emit(*rows)
 
 
-def _run(query: str) -> None:
+def _run(backend_name: str, query: str) -> None:
     try:
-        backend = make_backend(get_chosen_backend_name(), cache_dir())
+        backend = make_backend(backend_name, cache_dir())
     except ValueError as e:  # unknown backend name
         raise ConfigError(str(e)) from e
     quickcodes, flags = get_quickcode_map(), get_flag_map()
@@ -162,8 +163,11 @@ def _run(query: str) -> None:
 
 
 def main(argv: list[str]) -> None:
+    """argv = [backend, query...]. Each translate keyword in Alfred passes its own backend."""
     try:
-        _run(" ".join(argv))
+        if not argv:
+            raise ConfigError("The script filter must pass a backend name, e.g. `main.py translate argoslean \"$1\"`.")
+        _run(argv[0], " ".join(argv[1:]))
     except ConfigError as e:
         _emit(_row("WordWeave: settings problem", str(e)))
     except Exception as e:  # Alfred shows nothing on a crash, so surface it as a row
