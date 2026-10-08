@@ -4,7 +4,9 @@ Flow: read settings -> parse the query -> show one of
   - the help row,
   - a pair template ("Translate from 🇩🇪 -> __ (ISO Mode)") while the pair is incomplete,
   - a download row when the model for the pair isn't installed,
-  - ranked translations (Tab on a row swaps the pair and carries the word over).
+  - ranked translations (Tab on a row swaps the pair and carries the word over). The pair is
+    shown either as a first "header" row or in every row's subtitle (workflow setting
+    `ww_pair_display`).
 """
 import json
 
@@ -14,7 +16,8 @@ from translate.errors import PairNotInstalled
 from translate.select import select
 from translate.types import Backend, Language, Pair
 from workflow.environment import (
-    ConfigError, cache_dir, get_chosen_backend_name, get_flag_map, get_quickcode_map,
+    ConfigError, cache_dir, get_chosen_backend_name, get_flag_map, get_pair_display,
+    get_quickcode_map,
 )
 from workflow.parse import parse_command
 from workflow.types import (
@@ -45,7 +48,7 @@ def _slot(q: LanguageQuery) -> str:
 
 def _template(req: TranslationRequest) -> str:
     mode = "ISO Mode" if req.iso_mode else "QuickCode"
-    return f"Translate from {_slot(req.src)} -> {_slot(req.target)} ({mode})"
+    return f"Translate from {_slot(req.src)} → {_slot(req.target)} ({mode})"
 
 
 def _swapped_token(src: str, dst: str, iso_mode: bool, quickcodes: dict[str, str]) -> str:
@@ -119,15 +122,22 @@ def _translate(req: TranslationRequest, backend: Backend, quickcodes: dict[str, 
         _emit(_row("No translation returned", template))
         return
     swap = _swapped_token(s.code, d.code, req.iso_mode, quickcodes)
+    pair_label = f"{src.flag} → {dst.flag}"
+    in_header = get_pair_display() == "header"
     # No `uid`: Alfred would reorder rows by past use, but these are ranked best-first.
-    _emit(*({
+    rows = [{
         "title": h.text,
-        "subtitle": f"{src.flag} -> {dst.flag}",
+        "subtitle": "" if in_header else pair_label,
         "valid": True,
         "arg": h.text,
         "autocomplete": f"{swap} {h.text}",  # Tab = ping-pong: swap the pair, keep the word
         "text": {"copy": h.text, "largetype": h.text},
-    } for h in ranked))
+    } for h in ranked]
+    if in_header:
+        # Alfred preselects the first row, so the header forwards Tab to the best result
+        # to keep ping-pong working without arrowing down first.
+        rows.insert(0, _row(pair_label, autocomplete=rows[0]["autocomplete"]))
+    _emit(*rows)
 
 
 def _run(query: str) -> None:

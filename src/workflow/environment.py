@@ -26,6 +26,20 @@ def get_chosen_backend_name() -> str:
     return backend
 
 
+PAIR_DISPLAY_MODES = ("header", "subtitle")
+
+
+def get_pair_display() -> str:
+    """Where the language pair is shown on translation results: "header" or "subtitle".
+
+    "header": a non-actionable first row ("🇩🇪 → 🇺🇸"). "subtitle": under every result.
+    """
+    mode = os.environ.get("ww_pair_display", "").strip() or "header"
+    if mode not in PAIR_DISPLAY_MODES:
+        raise ConfigError(f"The 'ww_pair_display' setting must be one of {PAIR_DISPLAY_MODES}, got {mode!r}.")
+    return mode
+
+
 def _json_map(variable: str, label: str, lowercase_values: bool) -> dict[str, str]:
     """Parse a list of single-entry objects, e.g. [{"g": "de"}, {"e": "en"}], into one dict.
 

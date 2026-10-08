@@ -493,6 +493,32 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>subtitle</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>First row</string>
+						<string>header</string>
+					</array>
+					<array>
+						<string>Subtitle of each result</string>
+						<string>subtitle</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Where to show the translation pair (e.g. 🇩🇪 → 🇺🇸). "First row" adds a header row above the results; "Subtitle" repeats it under every result.</string>
+			<key>label</key>
+			<string>Show language pair</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>ww_pair_display</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>1.0</string>
 				<key>placeholder</key>
 				<string></string>
