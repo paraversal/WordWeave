@@ -317,7 +317,7 @@
 	<key>readme</key>
 	<string># WordWeave
 
-Offline translation built for **ping-pong**: translate a word, press Tab, translate the result back, repeat. A word in one language often maps to several in another, so bouncing back and forth works like a cross-language thesaurus. Great for finding the word on the tip of your tongue.
+Translation built for **ping-pong**: translate a word, press Tab, translate the result back, repeat. A word in one language often maps to several in another, so bouncing back and forth works like a cross-language thesaurus. Great for finding the word on the tip of your tongue.
 
 ## Translating
 
@@ -327,6 +327,13 @@ bt  ge  Hausboot
 │   └──── language pair (source, then target)
 └──────── keyword
 ```
+
+WordWeave has one keyword per translator, and both work exactly the same way:
+
+- `bt` translates with **Argos**, offline. Models run locally and your text never leaves your device.
+- `btg` translates with **Google Translate**, online. No downloads are needed, but it needs an internet connection and sends what you type to Google.
+
+Use one or both. To switch a keyword off, clear it in the workflow settings (for example, clear the Google keyword to keep WordWeave fully offline). Quick codes and flags are shared by both.
 
 There's no default language pair, so every query names both languages. Pick one of two styles (you can't mix them within a query):
 
@@ -341,7 +348,9 @@ Results are ranked best first. Press **Tab** on one to swap the pair and carry t
 
 ⌘C copies a result and ⌘L shows it in Large Type.
 
-## Downloading models
+## Downloading models (Argos only)
+
+*Using only Google (`btg`)? You can skip this section.*
 
 Nothing is bundled. Use the download keyword (default `btd`) to browse available pairs, filtering by code or name: `btd en pt` or `btd english port`. Press ↩ on a pair to install it and watch the progress bar. Once a model is installed, it works fully offline.
 
@@ -349,13 +358,19 @@ Only one download runs at a time. If a download stalls, check `job.log` in the w
 
 ## Things worth knowing
 
-**Models are one-way.** English → Spanish and Spanish → English are separate models, each needing its own download. For ping-pong you'll want both.
+**Argos models are one-way.** English → Spanish and Spanish → English are separate models, each needing its own download. For ping-pong you'll want both.
 
-**Pivot translation.** Most models go from or to English. For other pairs, such as Spanish → German, WordWeave chains two models through English (Spanish → English → German). You need both installed, and the result row tells you which one is missing. Pivoted results are a bit slower, a bit less accurate, and show fewer alternatives. Direct models are always preferred when they exist.
+**Argos pivots.** Most models go from or to English. For other pairs, such as Spanish → German, WordWeave chains two models through English (Spanish → English → German). You need both installed, and the result row tells you which one is missing. Pivoted results are a bit slower, a bit less accurate, and show fewer alternatives. Direct models are always preferred when they exist. Google has no such limits: it translates between any two of its languages directly.
 
-**Keep it short.** Words and short phrases work best. This is a small offline model, so don't expect Google Translate quality on long passages. And if you do, I hope you are ready for some true whimsy!
+**Keep it short.** Words and short phrases work best. Argos models are small, so don't expect Google Translate quality on long passages. And if you do, I hope you are ready for some true whimsy! Google (`btg`) handles longer text much better, but it only lists alternatives for single words; a phrase gets one translation.
+
+**Google needs the network.** Every keystroke sends a request, so heavy use can get rate-limited, and the unofficial endpoint behind it could change. If Google can't be reached, WordWeave shows an error row.
 
 ## Settings
+
+**Keywords**: one for Argos, one for Google, and one for downloading Argos models. Empty the text field to disable any one.
+
+**Argos engine**: *Lean* (default, fast) or *Stock* (the official Argos pipeline, much slower). Only affects the Argos keyword.
 
 **Quick Code Map** and **Language-Flag map** are JSON lists of one-entry objects:
 
