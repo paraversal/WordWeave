@@ -17,7 +17,7 @@ Fast translation in [Alfred](https://www.alfredapp.com/), offline with a lean im
 ## Requirements
 
 - macOS with [Alfred](https://www.alfredapp.com/) and the Powerpack
-- Python 3.14 + the [`uv` package manager](https://astral.sh/uv)
+- Python 3.14 + the [`uv` package manager](https://astral.sh/uv) (NOTE: this workflow pulls dependencies from pypi on first run - inspect `pyproject.toml` to see exactly what is downloaded)
 
 ## Installation
 
