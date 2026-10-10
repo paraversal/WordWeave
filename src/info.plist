@@ -520,7 +520,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<dict>
 				<key>default</key>
 				<string>[
-	{"e": "en"},
+	{"e": "en"}
 ]</string>
 				<key>required</key>
 				<false/>
@@ -543,7 +543,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 			<dict>
 				<key>default</key>
 				<string>[
-	{"en": "🌍️"}, 
+	{"en": "🌍️"}
 ]</string>
 				<key>required</key>
 				<false/>
@@ -636,7 +636,7 @@ If a setting is malformed, WordWeave says so in the result list.</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.1.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/paraversal</string>
 </dict>
