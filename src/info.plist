@@ -168,7 +168,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>.venv/bin/python main.py download "$from" "$to"</string>
+				<string>~/.local/bin/uv run main.py download "$from" "$to"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -230,7 +230,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>.venv/bin/python main.py list-pairs "$1"</string>
+				<string>~/.local/bin/uv run main.py list-pairs "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
